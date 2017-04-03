@@ -6,7 +6,7 @@ var dialog = require('electron').remote.dialog;
 var clipboard = require("clipboard");
 require('ace-min-noconflict');
 require('ace-min-noconflict/theme-monokai');
-
+require('./custom-syntax');
 var editor;
 var EDITOR_FILE_NAME;
 var EDITOR_FILE_VALUE;
@@ -20,6 +20,7 @@ $(window).on("load", function() {
         editor.commands.bindKey("Ctrl-P", "golineup");
     }
     editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/guiflow");
     setInterval(function() {
         if (editor.getValue() !== EDITOR_FILE_VALUE) {
             emitter.emit("diff", EDITOR_FILE_NAME);
